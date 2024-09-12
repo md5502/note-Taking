@@ -1,0 +1,14 @@
+{% extends "note_base.html" %}
+{% block title %}Your Notes{% endblock %}
+{% block content %}
+<h1>Your Notes</h1>
+<div class="list-group">
+    {% for note in notes %}
+        <a href="{% url 'note_detail' note.slug %}" class="list-group-item list-group-item-action">
+            {{ note.title }} - <small>Created on {{ note.created_at|date:"Y-m-d H:i" }}</small>
+        </a>
+    {% empty %}
+        <p>No notes available yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}

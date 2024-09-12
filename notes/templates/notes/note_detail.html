@@ -1,0 +1,10 @@
+{% extends "note_base.html" %}
+{% block title %}{{ note.title }}{% endblock %}
+{% block content %}
+<h1>{{ note.title }}</h1>
+<hr>
+<div>
+    {{ note.rendered_html|safe }}
+</div>
+<a href="{% url 'note_list' %}" class="btn btn-secondary mt-3">Back to Notes</a>
+{% endblock %}
