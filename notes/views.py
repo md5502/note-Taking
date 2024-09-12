@@ -5,11 +5,12 @@ from django.shortcuts import get_object_or_404, redirect, render
 from .forms import NoteCreateForm
 from .models import Note
 
-# Create your views here.
 
+# Create your views here.
+@login_required(login_url = "/users/login")
 def note_list(request):
-    notes = Note.objects.all()
-    return render(request, "note_list.html", {"notes": notes})
+    notes = Note.objects.filter(owner = request.user)
+    return render(request, "notes/note_list.html", {"notes": notes})
 
 @login_required(login_url = "/users/login")
 def note_create(request):
@@ -23,13 +24,13 @@ def note_create(request):
             return redirect("/")
     else:
         form = NoteCreateForm()
-    return render(request, "note_create", {"form": form})
+    return render(request, "notes/note_create.html", {"form": form})
 
 
 @login_required(login_url = "/users/login")
-def render_html(request, slug):
+def note_detail(request, slug):
     note = get_object_or_404(Note, slug=slug)
     if note.owner == request.user:
-        return render(request, "note_detail.html", {"note": note})
+        return render(request, "notes/note_detail.html", {"note": note})
     messages.error(request, "you have to be the owner of the note")
-    return redirect("note_list")
+    return redirect("notes:note_list")

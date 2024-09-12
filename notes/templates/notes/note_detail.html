@@ -1,4 +1,4 @@
-{% extends "note_base.html" %}
+{% extends "base.html" %}
 {% block title %}{{ note.title }}{% endblock %}
 {% block content %}
 <h1>{{ note.title }}</h1>
@@ -6,5 +6,5 @@
 <div>
     {{ note.rendered_html|safe }}
 </div>
-<a href="{% url 'note_list' %}" class="btn btn-secondary mt-3">Back to Notes</a>
+<a href="{% url 'notes:note_list' %}" class="btn btn-secondary mt-3">Back to Notes</a>
 {% endblock %}
