@@ -5,4 +5,5 @@ urlpatterns = [
     path("", include("notes.urls", namespace="notes")),
     path("users/", include("users.urls", namespace="users")),
     path("admin/", admin.site.urls),
+    path("grammar/", include("grammar.urls", namespace="grammar")),
 ]
